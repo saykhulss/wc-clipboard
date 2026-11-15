@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clipboard Reader</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:800px;margin:40px auto;padding:0 16px}
+button{font-size:24px;padding:16px 32px;cursor:pointer}
+pre{font-size:18px;white-space:pre-wrap;word-break:break-all;background:#f4f4f4;padding:16px;border:1px solid #ccc;min-height:120px}
+</style>
+</head>
+<body>
+<h1>Clipboard Reader</h1>
+<button id="read">Read clipboard</button>
+<pre id="out">Not read yet. Click the button, then allow clipboard access if asked.</pre>
+<script>
+document.getElementById('read').addEventListener('click', async () => {
+  const out = document.getElementById('out');
+  try {
+    const text = await navigator.clipboard.readText();
+    out.textContent = text ? text : '(clipboard is empty)';
+  } catch (e) {
+    out.textContent = 'ERROR: ' + e.name + ': ' + e.message;
+  }
+});
+</script>
+</body></html>
